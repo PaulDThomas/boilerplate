@@ -1,6 +1,7 @@
 # Copied from .gitignore
 # dependencies
 /node_modules
+/vendor
 /.pnp
 .pnp.js
 
@@ -25,3 +26,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+composer.lock
