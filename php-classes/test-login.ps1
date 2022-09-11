@@ -1,11 +1,11 @@
 ## Test register/login process, assuming that PHP web server is running
-$site = "http://localhost:8001/"
+$site = "http://localhost:8010/"
 # Set uid, email
 $testPerson = @{
-  "email" = "test_user@asup.co.uk"
-  "password" = "test-password" 
+  "email"      = "test_user@asup.co.uk"
+  "password"   = "test-password" 
   "first_name" = "Test"
-  "last_name" = "User"
+  "last_name"  = "User"
 } | ConvertTo-Json
 
 mysql -u root asupcouk_asup -e "Delete from struc_users where userEmail like 'test%'"

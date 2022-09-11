@@ -6,7 +6,6 @@
 .pnp.js
 
 # utility
-/.vscode
 
 # testing
 /coverage

@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "name": "Attach to Browser debug",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "name": "PowerShell Launch Current File",
       "type": "PowerShell",
       "request": "launch",
@@ -18,7 +25,7 @@
       "type": "node-terminal",
       "cwd": "${workspaceRoot}",
       "env": {
-          "PORT": "3001",
+        "PORT": "3010"
       }
     },
     {
@@ -36,7 +43,7 @@
         "-dupload_max_filesize=10M",
         "-dmemory_limit=256M",
         "-S",
-        "localhost:8001",
+        "localhost:8010"
       ],
       "env": {
         "XDEBUG_MODE": "debug,develop",
@@ -46,8 +53,8 @@
       "cwd": "${workspaceRoot}/php-public",
       "port": 9005,
       "xdebugSettings": {
-        "max_children": 999,
-      },     
+        "max_children": 999
+      },
       "serverReadyAction": {
         "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
         "uriFormat": "http://localhost:%s",

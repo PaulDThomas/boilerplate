@@ -1,11 +1,19 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: access');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: OPTIONS, POST');
 header('Content-Type: application/json; charset=UTF-8');
 header(
   'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
 );
+
+// Check method
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+  exit();
+} elseif ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  http_response_code(404);
+  exit();
+}
 
 require __DIR__ . '/../php-classes/Database.php';
 $db_connection = new Database();
@@ -13,6 +21,7 @@ $MYSQLI = $db_connection->dbConnection();
 
 function msg($success, $status, $message, $extra = [])
 {
+  http_response_code($status);
   return array_merge(
     [
       'success' => $success,
@@ -27,13 +36,8 @@ function msg($success, $status, $message, $extra = [])
 $data = json_decode(file_get_contents('php://input'));
 $returnData = [];
 
-// Must be a post
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-  $returnData = msg(0, 404, 'Page Not Found!');
-}
-
 // Check fields
-elseif (
+if (
   !isset($data->first_name) ||
   !isset($data->last_name) ||
   !isset($data->email) ||
