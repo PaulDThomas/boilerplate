@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useCallback, useContext, useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { AuthContext } from '../auth/AuthContext';
 
 export const Login = (): JSX.Element => {
@@ -34,8 +34,9 @@ export const Login = (): JSX.Element => {
       const url = process.env.REACT_APP_API_URL + 'login.php';
       const data = { email, password };
       axios.post(url, data).then(
-        () => {
+        (response: AxiosResponse) => {
           // No action required, handled in AuthLayer
+          console.log(response);
         },
         (error: AxiosError) => {
           console.warn(error);
@@ -65,7 +66,7 @@ export const Login = (): JSX.Element => {
           >
             <Form.Group
               className='mb-3'
-              controlId='form-login-name'
+              controlId='form-login-uid'
             >
               <Form.Label>Email</Form.Label>
               <Form.Control
