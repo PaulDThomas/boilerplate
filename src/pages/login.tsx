@@ -39,7 +39,7 @@ export const Login = (): JSX.Element => {
           console.log(response);
         },
         (error: AxiosError) => {
-          console.warn(error);
+          console.warn(error.response);
         },
       );
     },

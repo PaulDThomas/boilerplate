@@ -3,7 +3,7 @@ import type { Config } from 'jest';
 const config: Config = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>', '<rootDir>/src'],
 
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
@@ -15,7 +15,7 @@ const config: Config = {
   // when using React Testing Library and adds special
   // extended assertions to Jest
   setupFilesAfterEnv: [
-    // '@testing-library/react/cleanup-after-each',
+    '@testing-library/react/cleanup-after-each',
     '@testing-library/jest-dom/extend-expect',
   ],
   // Test spec file resolution pattern
@@ -23,8 +23,13 @@ const config: Config = {
   // should contain `test` or `spec`.
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
   // Module file extensions for importing
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   // };
+
+  // Added by Paul
+  collectCoverage: true,
+  coverageProvider: 'v8',
+  collectCoverageFrom: ['**/*.{js,jsx}', '**/*.{ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
 };
 
 export default config;
