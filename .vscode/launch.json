@@ -54,12 +54,12 @@
       "port": 9005,
       "xdebugSettings": {
         "max_children": 999
-      },
-      "serverReadyAction": {
-        "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
-        "uriFormat": "http://localhost:%s",
-        "action": "openExternally"
       }
+      // "serverReadyAction": {
+      //   "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
+      //   "uriFormat": "http://localhost:%s",
+      //   "action": "openExternally"
+      // }
     }
   ]
 }
