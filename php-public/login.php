@@ -27,7 +27,7 @@ function msg($success, $status, $message, $extra = [])
     [
       'success' => $success,
       'status' => $status,
-      'response' => $message,
+      'message' => $message,
     ],
     $extra,
   );
@@ -84,13 +84,13 @@ else {
 
           $returnData = [
             'success' => true,
-            'response' => 'You have successfully logged in.',
+            'message' => 'You have successfully logged in.',
             'token' => $token,
           ];
         }
         // IF INVALID PASSWORD
         else {
-          $returnData = msg(false, 422, 'Invalid Password!');
+          $returnData = msg(false, 403, 'Invalid Password!');
         }
       }
       // IF THE USER IS NOT FOUNDED BY EMAIL THEN SHOW THE FOLLOWING ERROR

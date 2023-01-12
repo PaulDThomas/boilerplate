@@ -9,7 +9,10 @@
       "request": "attach",
       "port": 9222,
       "name": "Attach to Browser debug",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "/__parcel_source_root/*": "${webRoot}/*"
+      }
     },
     {
       "name": "PowerShell Launch Current File",

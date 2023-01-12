@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
@@ -18,9 +18,16 @@ describe('Type entries', () => {
   });
 
   test('Fail no input', async () => {
-    render(<Login />);
+    // Set up user
+    const user = userEvent.setup();
+    // Render
+    await act(async () => {
+      render(<Login />);
+    });
+    // Click the button
     const btnSubmit = screen.getByRole('button');
-    userEvent.click(btnSubmit);
+    await user.click(btnSubmit);
+    // Do checks
     const validUid = screen.queryByText(/valid email/i);
     const validPwd = screen.queryByText(/8 char/i);
     expect(validUid).toBeInTheDocument();
@@ -28,17 +35,22 @@ describe('Type entries', () => {
   });
 
   test('Submit input', async () => {
+    // Set up user
+    const user = userEvent.setup();
     // Render
     render(<Login />);
     // Add text, check submit calls axios
     const inputUid = screen.getByLabelText('Email');
     const inputPwd = screen.getByLabelText('Password');
     const btnSubmit = screen.getByRole('button');
-    const axiosCalls = jest.spyOn(axios, 'post');
-    (axios.post as jest.Mock).mockResolvedValueOnce({ data: 'POST' });
-    userEvent.type(inputUid, 'paul@asup.co.uk');
-    userEvent.type(inputPwd, 'password');
-    userEvent.click(btnSubmit);
+    const axiosCalls = jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: 'POST' });
+    await user.type(inputUid, 'paul@asup.co.uk');
+    await user.type(inputPwd, 'password1');
+    await user.click(btnSubmit);
+    expect(axiosCalls).toBeCalledWith('/login.php', {
+      email: 'paul@asup.co.uk',
+      password: 'password1',
+    });
     expect(axiosCalls).toBeCalledTimes(1);
 
     // Check no warnings
@@ -70,17 +82,22 @@ describe('Type entries', () => {
   });
 
   test('Hit error with bad post return', async () => {
+    // Set up user
+    const user = userEvent.setup();
     // Render
     render(<Login />);
     // Add text, check submit calls axios
     const inputUid = screen.getByLabelText('Email');
     const inputPwd = screen.getByLabelText('Password');
     const btnSubmit = screen.getByRole('button');
-    const axiosCalls = jest.spyOn(axios, 'post');
-    (axios.post as jest.Mock).mockRejectedValueOnce(new Error('fail'));
-    userEvent.type(inputUid, 'paul@asup.co.uk');
-    userEvent.type(inputPwd, 'password');
-    userEvent.click(btnSubmit);
+    const axiosCalls = jest.spyOn(axios, 'post').mockRejectedValueOnce(new Error('fail'));
+    await user.type(inputUid, 'paul@asup.co.uk');
+    await user.type(inputPwd, 'password2');
+    await user.click(btnSubmit);
+    expect(axiosCalls).toBeCalledWith('/login.php', {
+      email: 'paul@asup.co.uk',
+      password: 'password2',
+    });
     expect(axiosCalls).toBeCalledTimes(1);
   });
 });

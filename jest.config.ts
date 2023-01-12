@@ -14,10 +14,7 @@ const config: Config = {
   // Runs special logic, such as cleaning up components
   // when using React Testing Library and adds special
   // extended assertions to Jest
-  setupFilesAfterEnv: [
-    '@testing-library/react/cleanup-after-each',
-    '@testing-library/jest-dom/extend-expect',
-  ],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect', './src/setupTests.ts'],
   // Test spec file resolution pattern
   // Matches parent folder `__tests__` and filename
   // should contain `test` or `spec`.
@@ -29,7 +26,18 @@ const config: Config = {
   // Added by Paul
   collectCoverage: true,
   coverageProvider: 'v8',
-  collectCoverageFrom: ['**/*.{js,jsx}', '**/*.{ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    'src/**/*.{ts,tsx}',
+    '!**/index.ts',
+    '!**/interface.ts',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+  ],
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
+  },
 };
 
 export default config;
