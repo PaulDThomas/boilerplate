@@ -1,6 +1,8 @@
-import { useContext } from 'react';
+import { Suspense, useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { AuthContext } from '../auth/AuthContext';
+import { Loading } from '../components/Loading';
+import { Wait } from '../components/Wait';
 
 export const Welcome = (): JSX.Element => {
   // Get authentication context
@@ -25,6 +27,13 @@ export const Welcome = (): JSX.Element => {
         <Row>
           <Col>
             <h4 className='mt-4'>Welcome {authContext.userDisplayName}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Suspense fallback={<Loading />}>
+              <Wait seconds={3} />
+            </Suspense>
           </Col>
         </Row>
       </Container>

@@ -18,12 +18,12 @@ const saveToken = (token: string) => {
 };
 
 const getToken = (): string | null => {
-  // Save token to local storage
+  // Get token from local storage
   return window.localStorage.getItem('token');
 };
 
 const logout = () => {
-  // Save token to local storage
+  // Remove token from local storage
   return window.localStorage.removeItem('token');
 };
 
