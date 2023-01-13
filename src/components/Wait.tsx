@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { iSuspensified, suspensify } from '../functions/suspensify';
 
 interface WaitProps {
@@ -13,7 +13,7 @@ export const Wait = ({ seconds }: WaitProps): JSX.Element => {
 
   const getText = async (ms: number) => {
     try {
-      //const ret = await axios.get(`${process.env.REACT_APP_API_URL}waiter.php?seconds=${seconds}`);
+      // const ret = await axios.get(`${process.env.REACT_APP_API_URL}waiter.php?seconds=${seconds}`);
       setReceivedText('Starting');
       await delay(ms);
       // setLoading(false);
@@ -25,13 +25,13 @@ export const Wait = ({ seconds }: WaitProps): JSX.Element => {
   };
 
   const loading = promiseHolder ? promiseHolder.read() : null;
-  const callSuspender = (ms: number) => {
+  const callSuspender = useCallback((ms: number) => {
     setPromiseHolder(suspensify(getText(ms)));
-  };
+  }, []);
 
   useEffect(() => {
-    callSuspender(3000);
-  }, []);
+    callSuspender(seconds * 1000);
+  }, [callSuspender, seconds]);
 
   return (
     <div

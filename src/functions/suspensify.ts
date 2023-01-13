@@ -15,7 +15,7 @@ export function suspensify(promise: Promise<unknown>): iSuspensified {
   //    variable will update as the Promise moves from
   //    pending to success or error.
   let result: unknown;
-  let suspender = promise.then(
+  const suspender = promise.then(
     (res) => {
       // On success, update the status to "success"
       status = 'success';

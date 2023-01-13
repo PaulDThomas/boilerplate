@@ -11,7 +11,7 @@ export const Loading = (): JSX.Element => {
         verticalAlign: 'center',
       }}
     >
-      I'm currently loading...
+      I&apos;m currently loading...
     </div>
   );
 };

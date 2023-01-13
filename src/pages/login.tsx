@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useCallback, useContext, useState } from 'react';
-import { Button, Col, Col as div, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { AuthContext } from '../auth/AuthContext';
 
 export const Login = (): JSX.Element => {
@@ -31,7 +31,7 @@ export const Login = (): JSX.Element => {
     const url = process.env.REACT_APP_API_URL + 'login.php';
     const data = { email, password };
     try {
-      const ret = await axios.post(url, data);
+      await axios.post(url, data);
       // No action required, handled in AuthLayer
     } catch (error: unknown) {
       if ((error as AxiosError).code !== undefined) {
