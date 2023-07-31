@@ -15,13 +15,6 @@
       }
     },
     {
-      "name": "PowerShell Launch Current File",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${file}",
-      "cwd": "${file}"
-    },
-    {
       "name": "Launch NPM web server",
       "command": "npm start",
       "request": "launch",
@@ -29,6 +22,11 @@
       "cwd": "${workspaceRoot}",
       "env": {
         "PORT": "3010"
+      },
+      "serverReadyAction": {
+        "pattern": "Server running at (http://localhost:[0-9]+)",
+        "uriFormat": "%s",
+        "action": "openExternally"
       }
     },
     {
