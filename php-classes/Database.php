@@ -4,7 +4,7 @@ class Database
   public function dbConnection()
   {
     // Read config file
-    $config = json_decode(file_get_contents('../secrets/app.info.json'));
+    $config = json_decode(file_get_contents("../secrets/app.info.json"));
 
     // Make connection
     $MYSQLI = new mysqli(
@@ -15,7 +15,7 @@ class Database
     );
 
     if (mysqli_connect_errno()) {
-      printf('Connect failed: %s', mysqli_connect_error());
+      printf("Connect failed: %s", mysqli_connect_error());
       exit();
     }
 
