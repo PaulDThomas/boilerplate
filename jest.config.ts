@@ -4,6 +4,7 @@ const config: Config = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
   roots: ['<rootDir>', '<rootDir>/src'],
+  modulePaths: ['<rootDir>/src'],
   testEnvironment: 'jsdom',
 
   // Jest transformations -- this adds support for TypeScript
@@ -42,6 +43,7 @@ const config: Config = {
   // Code coverage
   collectCoverage: true,
   coverageProvider: 'v8',
+  coverageReporters: ['lcov', 'text'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     'src/**/*.{ts,tsx}',
