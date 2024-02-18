@@ -47,7 +47,7 @@ describe("Type entries", () => {
     await user.type(inputUid, "paul@asup.co.uk");
     await user.type(inputPwd, "password1");
     await user.click(btnSubmit);
-    expect(axiosCalls).toBeCalledWith("/login.php", {
+    expect(axiosCalls).toHaveBeenCalledWith("/login.php", {
       email: "paul@asup.co.uk",
       password: "password1",
     });
