@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/JwtHandler.php';
+require __DIR__ . "/JwtHandler.php";
 
 class Auth extends JwtHandler
 {
@@ -17,27 +17,27 @@ class Auth extends JwtHandler
   public function getUser()
   {
     if (
-      array_key_exists('Authorization', $this->headers) &&
-      preg_match('/Bearer\s(\S+)/', $this->headers['Authorization'], $matches)
+      array_key_exists("Authorization", $this->headers) &&
+      preg_match("/Bearer\s(\S+)/", $this->headers["Authorization"], $matches)
     ) {
       $data = $this->jwtDecodeData($matches[1]);
 
       if (isset($data->user_id)):
         $user = $this->fetchUser($data->user_id);
         return [
-          'success' => true,
-          'user' => $user,
+          "success" => true,
+          "user" => $user,
         ];
       else:
         return [
-          'success' => false,
-          'response' => $data['message'],
+          "success" => false,
+          "response" => $data["message"],
         ];
       endif;
     } else {
       return [
-        'success' => false,
-        'response' => 'Token not found in request',
+        "success" => false,
+        "response" => "Token not found in request",
       ];
     }
   }

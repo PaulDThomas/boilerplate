@@ -5,11 +5,11 @@
 // `read()` method.
 export interface iSuspensified {
   read: () => unknown;
-  status: 'success' | 'pending' | 'error';
+  status: "success" | "pending" | "error";
 }
 
 export function suspensify(promise: Promise<unknown>): iSuspensified {
-  let status: 'success' | 'pending' | 'error' = 'pending';
+  let status: "success" | "pending" | "error" = "pending";
 
   // 1. Keep track of the Promise's state. The `status`
   //    variable will update as the Promise moves from
@@ -18,12 +18,12 @@ export function suspensify(promise: Promise<unknown>): iSuspensified {
   const suspender = promise.then(
     (res) => {
       // On success, update the status to "success"
-      status = 'success';
+      status = "success";
       result = res;
     },
     (error) => {
       // On error, update the status to "error"
-      status = 'error';
+      status = "error";
       result = error;
     },
   );
@@ -37,14 +37,14 @@ export function suspensify(promise: Promise<unknown>): iSuspensified {
   return {
     status,
     read() {
-      if (status === 'pending') {
+      if (status === "pending") {
         // Pending promises are thrown and caught by <Suspense />.
         // FYI: Anything can be thrown in JavaScript, not just Errors.
         throw suspender;
-      } else if (status === 'error') {
+      } else if (status === "error") {
         // Errors are thrown too, but are caught by an Error Boundary.
         throw result;
-      } else if (status === 'success') {
+      } else if (status === "success") {
         // Finally, the Promise result is returned once it's resolved.
         return result;
       }

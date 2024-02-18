@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useContext, useMemo, useState } from 'react';
-import { AuthContext } from './AuthContext';
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { useContext, useMemo, useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 export const AuthLayer = ({
   children,
@@ -10,9 +10,9 @@ export const AuthLayer = ({
   // Use context, set variables
   const authContext = useContext(AuthContext);
   const [userPK, setUserPK] = useState<number | null>(null);
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userFirstName, setUserFirstName] = useState<string>('');
-  const [userLastName, setUserLastName] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userFirstName, setUserFirstName] = useState<string>("");
+  const [userLastName, setUserLastName] = useState<string>("");
   const userDisplayName = useMemo<string>(
     () => `${userFirstName} ${userLastName}`,
     [userFirstName, userLastName],
@@ -22,7 +22,7 @@ export const AuthLayer = ({
   axios.interceptors.request.use((config) => {
     const token = authContext.getToken();
     if (token && config.headers) {
-      config.headers['Authorization'] = 'Bearer ' + token;
+      config.headers["Authorization"] = "Bearer " + token;
     }
     return config;
   });
@@ -31,12 +31,12 @@ export const AuthLayer = ({
   axios.interceptors.response.use(
     (response) => {
       if (
-        response.config.url?.endsWith('login.php') &&
+        response.config.url?.endsWith("login.php") &&
         response.data.success &&
         response.data.token
       ) {
         authContext.saveToken(response.data.token);
-        axios.get(process.env.REACT_APP_API_URL + 'getUser.php').then(
+        axios.get(process.env.REACT_APP_API_URL + "getUser.php").then(
           (response: AxiosResponse) => {
             setUserPK(response.data.user.userPK);
             setUserEmail(response.data.user.userEmail);
@@ -48,7 +48,7 @@ export const AuthLayer = ({
           },
         );
       }
-      if (response.config.url?.endsWith('getUser.php') === true && response.data.userPK) {
+      if (response.config.url?.endsWith("getUser.php") === true && response.data.userPK) {
         setUserPK(response.data.user.userPK);
         setUserEmail(response.data.user.userEmail);
         setUserFirstName(response.data.user.userFirstName);

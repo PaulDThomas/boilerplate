@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { iSuspensified, suspensify } from '../functions/suspensify';
+import { useCallback, useEffect, useState } from "react";
+import { iSuspensified, suspensify } from "../functions/suspensify";
 
 interface WaitProps {
   seconds: number;
@@ -8,18 +8,18 @@ interface WaitProps {
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const Wait = ({ seconds }: WaitProps): JSX.Element => {
-  const [receivedText, setReceivedText] = useState<string>('nothing yet');
+  const [receivedText, setReceivedText] = useState<string>("nothing yet");
   const [promiseHolder, setPromiseHolder] = useState<iSuspensified>();
 
   const getText = async (ms: number) => {
     try {
       // const ret = await axios.get(`${process.env.REACT_APP_API_URL}waiter.php?seconds=${seconds}`);
-      setReceivedText('Starting');
+      setReceivedText("Starting");
       await delay(ms);
       // setLoading(false);
-      setReceivedText('Finished');
+      setReceivedText("Finished");
     } catch (error: unknown) {
-      console.warn('Something went wrong');
+      console.warn("Something went wrong");
       console.warn(error);
     }
   };
@@ -36,14 +36,14 @@ export const Wait = ({ seconds }: WaitProps): JSX.Element => {
   return (
     <div
       style={{
-        height: '100px',
-        width: '400px',
-        padding: '1rem',
-        backgroundColor: 'red',
-        borderRadius: '1rem',
+        height: "100px",
+        width: "400px",
+        padding: "1rem",
+        backgroundColor: "red",
+        borderRadius: "1rem",
       }}
     >
-      {loading ? 'Loading' : receivedText}
+      {loading ? "Loading" : receivedText}
       <br />
       <button onClick={() => callSuspender(500)}>Reload</button>
     </div>

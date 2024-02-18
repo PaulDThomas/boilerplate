@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 // Authorization context, client representation of session variables
 interface iAuthContext {
@@ -14,17 +14,17 @@ interface iAuthContext {
 
 const saveToken = (token: string) => {
   // Save token to local storage
-  window.localStorage.setItem('token', token);
+  window.localStorage.setItem("token", token);
 };
 
 const getToken = (): string | null => {
   // Get token from local storage
-  return window.localStorage.getItem('token');
+  return window.localStorage.getItem("token");
 };
 
 const logout = () => {
   // Remove token from local storage
-  return window.localStorage.removeItem('token');
+  return window.localStorage.removeItem("token");
 };
 
 export const AuthContext = createContext<iAuthContext>({

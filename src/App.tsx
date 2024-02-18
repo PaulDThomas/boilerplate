@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { AuthContext } from './auth/AuthContext';
-import { Login } from './pages/login';
-import { Welcome } from './pages/welcome';
+import { useContext } from "react";
+import { AuthContext } from "./auth/AuthContext";
+import { Login } from "./pages/login";
+import { Welcome } from "./pages/welcome";
 
 // Main application
 const App = (): JSX.Element => {

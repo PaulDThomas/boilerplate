@@ -1,16 +1,16 @@
-import axios, { AxiosError } from 'axios';
-import { useCallback, useContext, useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { AuthContext } from '../auth/AuthContext';
+import axios, { AxiosError } from "axios";
+import { useCallback, useContext, useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { AuthContext } from "../auth/AuthContext";
 
 export const Login = (): JSX.Element => {
   // Get current authContext
   const authContext = useContext(AuthContext);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [emailWarn, setEmailWarn] = useState<string | null>(null);
   const [pwdWarn, setPwdWarn] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>("");
 
   // Send information to login
   const submitForm = useCallback(async () => {
@@ -18,17 +18,17 @@ export const Login = (): JSX.Element => {
     let newPwdWarn = null;
     let newEmailWarn = null;
     if ((password?.length ?? 0) < 8) {
-      newPwdWarn = 'Password must be at least 8 characters';
+      newPwdWarn = "Password must be at least 8 characters";
     }
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      newEmailWarn = 'Please enter a valid email address';
+      newEmailWarn = "Please enter a valid email address";
     }
     setPwdWarn(newPwdWarn);
     setEmailWarn(newEmailWarn);
     if (newPwdWarn || newEmailWarn) return;
 
     // Submit the data, it is handled in AuthLayer
-    const url = process.env.REACT_APP_API_URL + 'login.php';
+    const url = process.env.REACT_APP_API_URL + "login.php";
     const data = { email, password };
     try {
       await axios.post(url, data);
@@ -36,15 +36,15 @@ export const Login = (): JSX.Element => {
     } catch (error: unknown) {
       if ((error as AxiosError).code !== undefined) {
         const axErr = error as AxiosError;
-        console.warn(axErr.response ?? 'An error has occured');
+        console.warn(axErr.response ?? "An error has occured");
         setFeedback(
           (axErr.response?.data as { success: boolean; message: string }).message ??
             axErr.response?.statusText ??
-            'An error has occured',
+            "An error has occured",
         );
       } else {
         console.warn(error);
-        setFeedback(typeof error === 'string' ? error : 'An unknown error has occured');
+        setFeedback(typeof error === "string" ? error : "An unknown error has occured");
       }
     }
   }, [email, password]);

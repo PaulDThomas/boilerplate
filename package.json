@@ -27,8 +27,8 @@
     "build": "parcel build public/index.html",
     "start": "parcel public/index.html",
     "prepare": "husky",
-    "test": "jest --watch",
-    "test:coverage-report": "jest --coverage --watchAll=false"
+    "test": "jest --collectCoverage=true --maxWorkers=4",
+    "test-watch": "jest --watch --collectCoverage=true"
   },
   "eslintConfig": {
     "extends": [
