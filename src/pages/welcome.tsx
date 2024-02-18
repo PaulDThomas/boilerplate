@@ -12,8 +12,8 @@ export const Welcome = (): JSX.Element => {
     <div style={{ position: "relative" }}>
       <Button
         style={{ position: "absolute", top: "2px", right: "2px" }}
-        variant='primary'
-        size='sm'
+        variant="primary"
+        size="sm"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -26,7 +26,7 @@ export const Welcome = (): JSX.Element => {
       <Container>
         <Row>
           <Col>
-            <h4 className='mt-4'>Welcome {authContext.userDisplayName}</h4>
+            <h4 className="mt-4">Welcome {authContext.userDisplayName}</h4>
           </Col>
         </Row>
         <Row>

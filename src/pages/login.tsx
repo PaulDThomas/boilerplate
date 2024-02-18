@@ -28,7 +28,7 @@ export const Login = (): JSX.Element => {
     if (newPwdWarn || newEmailWarn) return;
 
     // Submit the data, it is handled in AuthLayer
-    const url = process.env.REACT_APP_API_URL + "login.php";
+    const url = process.env.REACT_APP_API_URL + "/login.php";
     const data = { email, password };
     try {
       await axios.post(url, data);
@@ -59,48 +59,48 @@ export const Login = (): JSX.Element => {
     <Container fluid>
       <Row>
         <Col
-          className='justify-content-center'
+          className="justify-content-center"
           md={{ span: 8, offset: 2 }}
         >
           <Form
-            id='form-login'
-            className='border border-dark rounded m-4 p-4'
+            id="form-login"
+            className="border border-dark rounded m-4 p-4"
             onSubmit={submitForm}
           >
             <Form.Group
-              className='mb-3'
-              controlId='form-login-uid'
+              className="mb-3"
+              controlId="form-login-uid"
             >
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type='email'
-                placeholder='Enter email'
+                type="email"
+                placeholder="Enter email"
                 isInvalid={emailWarn !== null}
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
               />
-              <Form.Control.Feedback type='invalid'>{emailWarn}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{emailWarn}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group
-              className='mb-3'
-              controlId='form-login-pwd'
+              className="mb-3"
+              controlId="form-login-pwd"
             >
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type='password'
-                placeholder='Enter password'
+                type="password"
+                placeholder="Enter password"
                 isInvalid={pwdWarn !== null}
                 value={password}
                 onChange={(e) => setPassword(e.currentTarget.value)}
               />
-              <Form.Control.Feedback type='invalid'>{pwdWarn}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{pwdWarn}</Form.Control.Feedback>
             </Form.Group>
             <Row>
-              <Col md='auto'>
+              <Col md="auto">
                 <Button
-                  className='align-self-end'
-                  variant='primary'
-                  type='submit'
+                  className="align-self-end"
+                  variant="primary"
+                  type="submit"
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

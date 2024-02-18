@@ -51,7 +51,7 @@ describe("Type entries", () => {
       email: "paul@asup.co.uk",
       password: "password1",
     });
-    expect(axiosCalls).toBeCalledTimes(1);
+    expect(axiosCalls).toHaveBeenCalledTimes(1);
 
     // Check no warnings
     const validUid = screen.queryByText(/valid email/i);
@@ -94,10 +94,10 @@ describe("Type entries", () => {
     await user.type(inputUid, "paul@asup.co.uk");
     await user.type(inputPwd, "password2");
     await user.click(btnSubmit);
-    expect(axiosCalls).toBeCalledWith("/login.php", {
+    expect(axiosCalls).toHaveBeenCalledWith("/login.php", {
       email: "paul@asup.co.uk",
       password: "password2",
     });
-    expect(axiosCalls).toBeCalledTimes(1);
+    expect(axiosCalls).toHaveBeenCalledTimes(1);
   });
 });

@@ -13,7 +13,7 @@ export const Wait = ({ seconds }: WaitProps): JSX.Element => {
 
   const getText = async (ms: number) => {
     try {
-      // const ret = await axios.get(`${process.env.REACT_APP_API_URL}waiter.php?seconds=${seconds}`);
+      // const ret = await axios.get(`${process.env.REACT_APP_API_URL}/waiter.php?seconds=${seconds}`);
       setReceivedText("Starting");
       await delay(ms);
       // setLoading(false);

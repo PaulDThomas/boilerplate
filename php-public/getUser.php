@@ -15,12 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
   exit();
 }
 
+// Connect to the database
 require __DIR__ . "/../php-classes/Database.php";
-require __DIR__ . "/../php-classes/AuthMiddleware.php";
-
-$allHeaders = getallheaders();
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
+
+// Get the user information
+require __DIR__ . "/../php-classes/AuthMiddleware.php";
+$allHeaders = getallheaders();
 $auth = new Auth($conn, $allHeaders);
 
+// Return success or failure
 echo json_encode($auth->getUser());
+
+// Close session
+session_write_close();

@@ -1,6 +1,6 @@
 {
   "name": "boilerplate",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "description": "My typescript/php boiler plate.",
   "author": "Paul Thomas <@PaulDThomas>",
@@ -12,7 +12,6 @@
   "bugs": {
     "url": "https://github.com/PaulDThomas/boilerplate/issues"
   },
-  "homepage": ".",
   "keywords": [
     "react",
     "typescript",
@@ -29,12 +28,6 @@
     "prepare": "husky",
     "test": "jest --collectCoverage=true --maxWorkers=4",
     "test-watch": "jest --watch --collectCoverage=true"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -75,6 +68,7 @@
     "buffer": "^6.0.3",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -90,6 +84,24 @@
     "ts-jest-mock-import-meta": "^1.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "@parcel/transformer-js": {
+    "inlineEnvironment": [
+      "REACT_APP_*",
+      "npm_package_*"
+    ]
+  },
+  "@parcel/transformer-css": {
+    "cssModules": {
+      "pattern": "asup-[name]-[hash]-[local]",
+      "dashedIndents": true
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
