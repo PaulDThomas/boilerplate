@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 // Authorization context, client representation of session variables
 interface iAuthContext {
-  userPK?: number | null;
+  userno?: number | null;
   userEmail?: string;
   userFirstName?: string;
   userLastName?: string;

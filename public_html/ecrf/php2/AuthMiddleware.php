@@ -16,7 +16,7 @@ class Auth extends JwtHandler
     $this->db = $db;
     $this->headers = $headers;
     // Read config file
-    $this->config = json_decode(file_get_contents(__DIR__ . "/../secrets/app.info.json"));
+    $this->config = json_decode(file_get_contents(__DIR__ . "/app.info.json"));
   }
 
   public function getUser()
@@ -70,22 +70,28 @@ class Auth extends JwtHandler
       WHERE
        su.userPK="$user_id"
        and su.userPk = sa.userPK
-       and sa.ideCRF_study = {$this->config->StudyNo}
-      ;
       QRY;
+      if (isset($_SESSION["ideCRF_study"])) {
+        $query .= " and sa.ideCRF_study = {$_SESSION["ideCRF_study"]}";
+      } elseif (isset($this->config->ideCRF_study)) {
+        $query .= " and sa.ideCRF_study = {$this->config->ideCRF_study}";
+      }
       $result = $this->db->query($query);
 
       if ($result->num_rows) {
         $row = $result->fetch_assoc();
-        $_SESSION["userPK"] = $row["userPK"];
+        $_SESSION["userno"] = $row["userPK"];
         $_SESSION["userEmail"] = $row["userEmail"];
         $_SESSION["userFirstName"] = $row["userFirstName"];
         $_SESSION["userLastName"] = $row["userLastName"];
         $_SESSION["userDisplayName"] = "{$row["userFirstName"]} {$row["userLastName"]}";
         $_SESSION["accessType"] = "{$row["access_type"]}";
+        if (!isset($_SESSION["ideCRF_study"]) && isset($this->config->StudyNo)) {
+          $_SESSION["ideCRF_study"] = $this->config->StudyNo;
+        }
         return $row;
       } else {
-        $_SESSION["userPK"] = null;
+        $_SESSION["userno"] = null;
         $_SESSION["userEmail"] = "";
         $_SESSION["userFirstName"] = "";
         $_SESSION["userLastName"] = "";

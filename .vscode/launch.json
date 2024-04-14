@@ -15,11 +15,11 @@
       }
     },
     {
-      "name": "PowerShell Launch Current File",
+      "name": "Deploy to asupcouk repo",
       "type": "PowerShell",
       "request": "launch",
-      "script": "${file}",
-      "cwd": "${file}"
+      "script": "${workspaceFolder}/deploy.ps1",
+      "cwd": "${workspaceFolder}"
     },
     {
       "name": "Launch NPM web server",
@@ -55,7 +55,7 @@
         "XDEBUG_CONFIG": "client_port=${port}"
       },
       "program": "",
-      "cwd": "${workspaceRoot}/php-public",
+      "cwd": "${workspaceRoot}/public_html",
       "port": 9005,
       "xdebugSettings": {
         "max_children": 999

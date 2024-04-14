@@ -6,7 +6,7 @@
  *  https://www.w3jar.com/php-login-and-registration-restful-api/
  */
 
-require "../vendor/autoload.php";
+require __DIR__ . "/../../vendor/autoload.php";
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -24,7 +24,7 @@ class JwtHandler
   public function __construct()
   {
     // Read config file
-    $config = json_decode(file_get_contents("../secrets/app.info.json"));
+    $config = json_decode(file_get_contents(__DIR__ . "/app.info.json"));
 
     // set your default time-zone
     //date_default_timezone_set('Europe/London');

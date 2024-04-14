@@ -3,7 +3,7 @@
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "src/",
-    "outDir": "dist/",
+    "outDir": "public_html/ecrf/target/", // Change to target folder
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -29,5 +29,5 @@
     ]
   },
   "include": ["global.d.ts", "src", "__mocks__"],
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": ["node_modules", "dist", "build", "public_html/ecrf/target"]
 }

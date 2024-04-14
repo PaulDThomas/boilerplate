@@ -9,7 +9,7 @@ export const AuthLayer = ({
 }): JSX.Element => {
   // Use context, set variables
   const authContext = useContext(AuthContext);
-  const [userPK, setUserPK] = useState<number | null>();
+  const [userno, setUserno] = useState<number | null>();
   const [userEmail, setUserEmail] = useState<string>("");
   const [userFirstName, setUserFirstName] = useState<string>("");
   const [userLastName, setUserLastName] = useState<string>("");
@@ -37,7 +37,7 @@ export const AuthLayer = ({
       authContext.saveToken(response.data.token);
       axios.get(process.env.REACT_APP_API_URL + "/getUser.php").then(
         (response: AxiosResponse) => {
-          setUserPK(response.data.user.userPK);
+          setUserno(response.data.user.userPK);
           setUserEmail(response.data.user.userEmail);
           setUserFirstName(response.data.user.userFirstName);
           setUserLastName(response.data.user.userLastName);
@@ -47,11 +47,16 @@ export const AuthLayer = ({
         },
       );
     }
-    if (response.config.url?.endsWith("/getUser.php") === true && response.data.user.userPK) {
-      setUserPK(response.data.user.userPK);
+    if (response.config.url?.endsWith("getUser.php") && response.data?.user?.userPK) {
+      setUserno(response.data.user.userPK);
       setUserEmail(response.data.user.userEmail);
       setUserFirstName(response.data.user.userFirstName);
       setUserLastName(response.data.user.userLastName);
+    } else if (response.config.url?.endsWith("getUser.php")) {
+      setUserno(null);
+      setUserEmail("");
+      setUserFirstName("");
+      setUserLastName("");
     }
     return response;
   });
@@ -60,7 +65,7 @@ export const AuthLayer = ({
     <AuthContext.Provider
       value={{
         ...authContext,
-        userPK,
+        userno,
         userEmail,
         userFirstName,
         userLastName,

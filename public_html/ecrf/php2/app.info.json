@@ -1,0 +1,11 @@
+{
+  "StudyNo": 9,
+  "SiteUrl": "https://localhost/ecrf/site/",
+  "Database": {
+    "Host": "localhost",
+    "Username": "root",
+    "Pass": "",
+    "Name": "asupcouk_asup"
+  },
+  "Secret": "amazeBalls"
+}

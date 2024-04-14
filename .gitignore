@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/vendor
+**/vendor
 /.pnp
 .pnp.js
 
@@ -12,10 +12,12 @@
 
 # production
 /build
+/public_html/ecrf/target
 /dist
 
 # Secrets
 /secrets
+app.info.json
 
 # misc
 .DS_Store

@@ -15,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
   exit();
 }
 
-require __DIR__ . "/../php-classes/Database.php";
-require __DIR__ . "/../php-classes/JwtHandler.php";
+require __DIR__ . "/../php2/Database.php";
+require __DIR__ . "/../php2/JwtHandler.php";
 // Read config file
-$config = json_decode(file_get_contents("../secrets/app.info.json"));
+$config = json_decode(file_get_contents(__DIR__ . "/../php2/app.info.json"));
 
 function msg($success, $status, $message, $extra = [])
 {

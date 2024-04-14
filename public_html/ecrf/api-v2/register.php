@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
   exit();
 }
 
-require __DIR__ . "/../php-classes/Database.php";
+require __DIR__ . "/../php2/Database.php";
 $db_connection = new Database();
 $MYSQLI = $db_connection->dbConnection();
 

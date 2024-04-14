@@ -31,3 +31,16 @@ code {
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+table.simpletable .simpletable-columnfilter-holder {
+  top: 26px;
+  line-height: 16px;
+}
+
+table.simpletable table.columnfilter-table {
+  height: 196px;
+}
+
+table.simpletable > tbody > tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1);
+}

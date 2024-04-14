@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 }
 
 // Connect to the database
-require __DIR__ . "/../php-classes/Database.php";
+require __DIR__ . "/../php2/Database.php";
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
 
 // Get the user information
-require __DIR__ . "/../php-classes/AuthMiddleware.php";
+require __DIR__ . "/../php2/AuthMiddleware.php";
 $allHeaders = getallheaders();
 $auth = new Auth($conn, $allHeaders);
 
