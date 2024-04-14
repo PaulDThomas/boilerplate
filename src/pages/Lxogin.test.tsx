@@ -2,16 +2,16 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import { AuthContext } from "../auth/AuthContext";
-import { Login } from "./login";
+import { Login } from "./Lxogin";
 
 jest.mock("axios");
 
 describe("Type entries", () => {
   test("Elements there", async () => {
     render(<Login />);
-    const inputUid = screen.getByLabelText("Email");
-    const inputPwd = screen.getByLabelText("Password");
-    const btnSubmit = screen.getByRole("button");
+    const inputUid = screen.queryByLabelText("Email") as HTMLInputElement;
+    const inputPwd = screen.queryByLabelText("Password") as HTMLInputElement;
+    const btnSubmit = screen.queryByRole("button") as HTMLButtonElement;
     expect(inputUid).toBeInTheDocument();
     expect(inputPwd).toBeInTheDocument();
     expect(btnSubmit).toBeInTheDocument();
@@ -40,9 +40,9 @@ describe("Type entries", () => {
     // Render
     render(<Login />);
     // Add text, check submit calls axios
-    const inputUid = screen.getByLabelText("Email");
-    const inputPwd = screen.getByLabelText("Password");
-    const btnSubmit = screen.getByRole("button");
+    const inputUid = screen.queryByLabelText("Email") as HTMLInputElement;
+    const inputPwd = screen.queryByLabelText("Password") as HTMLInputElement;
+    const btnSubmit = screen.queryByRole("button") as HTMLButtonElement;
     const axiosCalls = jest.spyOn(axios, "post").mockResolvedValueOnce({ data: "POST" });
     await user.type(inputUid, "paul@asup.co.uk");
     await user.type(inputPwd, "password1");
@@ -51,7 +51,7 @@ describe("Type entries", () => {
       email: "paul@asup.co.uk",
       password: "password1",
     });
-    expect(axiosCalls).toHaveBeenCalledTimes(1);
+    expect(axiosCalls).toBeCalledTimes(1);
 
     // Check no warnings
     const validUid = screen.queryByText(/valid email/i);
@@ -64,7 +64,7 @@ describe("Type entries", () => {
     render(
       <AuthContext.Provider
         value={{
-          userPK: 2,
+          userno: 2,
           logout: () => {
             return;
           },
@@ -94,10 +94,10 @@ describe("Type entries", () => {
     await user.type(inputUid, "paul@asup.co.uk");
     await user.type(inputPwd, "password2");
     await user.click(btnSubmit);
-    expect(axiosCalls).toHaveBeenCalledWith("/login.php", {
+    expect(axiosCalls).toBeCalledWith("/login.php", {
       email: "paul@asup.co.uk",
       password: "password2",
     });
-    expect(axiosCalls).toHaveBeenCalledTimes(1);
+    expect(axiosCalls).toBeCalledTimes(1);
   });
 });

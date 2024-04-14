@@ -50,8 +50,8 @@ export const Login = (): JSX.Element => {
   }, [email, password]);
 
   // Show nothing if already logged in
-  if (authContext.userPK) {
-    return <></>;
+  if (authContext.userno) {
+    window.location.hash = "#queries";
   }
 
   // Print log in page
