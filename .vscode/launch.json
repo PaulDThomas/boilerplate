@@ -27,6 +27,9 @@
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceRoot}",
+      "env": {
+        "PORT": "3000"
+      },
       "serverReadyAction": {
         "pattern": "Server running at (http://localhost:[0-9]+)",
         "uriFormat": "%s",
