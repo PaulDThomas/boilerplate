@@ -15,13 +15,20 @@
       }
     },
     {
+      "name": "Deploy to asupcouk repo",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/deploy.ps1",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Launch NPM web server",
-      "command": "npm start",
+      "command": "npm run start",
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceRoot}",
       "env": {
-        "PORT": "3010"
+        "PORT": "3000"
       },
       "serverReadyAction": {
         "pattern": "Server running at (http://localhost:[0-9]+)",
@@ -51,16 +58,11 @@
         "XDEBUG_CONFIG": "client_port=${port}"
       },
       "program": "",
-      "cwd": "${workspaceRoot}/php-public",
+      "cwd": "${workspaceRoot}/public_html",
       "port": 9005,
       "xdebugSettings": {
         "max_children": 999
       }
-      // "serverReadyAction": {
-      //   "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
-      //   "uriFormat": "http://localhost:%s",
-      //   "action": "openExternally"
-      // }
     }
   ]
 }

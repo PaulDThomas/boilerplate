@@ -4,7 +4,7 @@ class Database
   public function dbConnection()
   {
     // Read config file
-    $config = json_decode(file_get_contents('../secrets/app.info.json'));
+    $config = json_decode(file_get_contents(__DIR__ . "/app.info.json"));
 
     // Make connection
     $MYSQLI = new mysqli(
@@ -15,11 +15,11 @@ class Database
     );
 
     if (mysqli_connect_errno()) {
-      printf('Connect failed: %s', mysqli_connect_error());
+      printf("Connect failed: %s", mysqli_connect_error());
       exit();
     }
 
-    mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL | MYSQLI_REPORT_INDEX);
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     return $MYSQLI;
   }

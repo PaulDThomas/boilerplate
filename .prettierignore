@@ -13,6 +13,7 @@
 # production
 /build
 /dist
+/public_html/ecrf/target
 
 # misc
 .DS_Store
