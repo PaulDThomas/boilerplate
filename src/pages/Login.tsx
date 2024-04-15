@@ -1,11 +1,43 @@
+import { Button, Input, Label, makeStyles, shorthands } from "@fluentui/react-components";
 import axios, { AxiosError } from "axios";
-import { useCallback, useContext, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { AuthContext } from "../auth/AuthContext";
+import { useCallback, useState } from "react";
+
+const useStyles = makeStyles({
+  container: {
+    paddingTop: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    ...shorthands.gap("20px"),
+    maxWidth: "400px",
+    minWidth: "300px",
+
+    "> div": {
+      display: "flex",
+      flexDirection: "column",
+      ...shorthands.gap("2px"),
+    },
+  },
+  formInvalid: {
+    color: "red",
+    fontSize: "12px",
+  },
+  btn: {
+    width: "120px",
+    alignSelf: "flex-end",
+  },
+});
 
 export const Login = (): JSX.Element => {
+  const styles = useStyles();
+
   // Get current authContext
-  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [emailWarn, setEmailWarn] = useState<string | null>(null);
@@ -49,72 +81,60 @@ export const Login = (): JSX.Element => {
     }
   }, [email, password]);
 
-  // Show nothing if already logged in
-  if (authContext.userno) {
-    window.location.hash = "#queries";
-  }
-
   // Print log in page
   return (
-    <Container fluid>
-      <Row>
-        <Col
-          className="justify-content-center"
-          md={{ span: 8, offset: 2 }}
-        >
-          <Form
-            id="form-login"
-            className="border border-dark rounded m-4 p-4"
-            onSubmit={submitForm}
+    <div className={styles.container}>
+      <form className={styles.form}>
+        <div>
+          <Label
+            htmlFor="user-email"
+            required
           >
-            <Form.Group
-              className="mb-3"
-              controlId="form-login-uid"
-            >
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                isInvalid={emailWarn !== null}
-                value={email}
-                onChange={(e) => setEmail(e.currentTarget.value)}
-              />
-              <Form.Control.Feedback type="invalid">{emailWarn}</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="form-login-pwd"
-            >
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                isInvalid={pwdWarn !== null}
-                value={password}
-                onChange={(e) => setPassword(e.currentTarget.value)}
-              />
-              <Form.Control.Feedback type="invalid">{pwdWarn}</Form.Control.Feedback>
-            </Form.Group>
-            <Row>
-              <Col md="auto">
-                <Button
-                  className="align-self-end"
-                  variant="primary"
-                  type="submit"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    submitForm();
-                  }}
-                >
-                  Submit
-                </Button>
-              </Col>
-              <Col>{feedback}</Col>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+            Email
+          </Label>
+          <Input
+            id="user-email"
+            type="email"
+            autoComplete="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+          <div className={styles.formInvalid}>{emailWarn}</div>
+        </div>
+
+        <div>
+          <Label
+            htmlFor="user-password"
+            required
+          >
+            Password
+          </Label>
+          <Input
+            id="user-password"
+            type="password"
+            autoComplete="current-password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+          <div className={styles.formInvalid}>{pwdWarn}</div>
+        </div>
+        <div>
+          <Button
+            className={styles.btn}
+            type="submit"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              submitForm();
+            }}
+          >
+            Submit
+          </Button>
+        </div>
+        <div>{feedback}</div>
+      </form>
+    </div>
   );
 };

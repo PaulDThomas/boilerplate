@@ -43,16 +43,13 @@
   },
   "dependencies": {
     "@asup/simple-table": "^1.3.13",
+    "@fluentui/react-components": "^9.47.5",
     "axios": "^1.1.3",
-    "bootstrap": "^5.2.2",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.5.0",
-    "react-bootstrap-icons": "^1.8.4",
     "react-dom": "^18.2.0",
     "react-router": "^6.22.3",
-    "react-router-dom": "^6.22.3",
-    "sass": "^1.71.0"
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.8.2",
