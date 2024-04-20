@@ -7,26 +7,22 @@ import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
+const Inner = (): JSX.Element => (
+  <AuthLayer>
+    <BrowserRouter>
+      <FluentProvider theme={webLightTheme}>
+        <App />
+      </FluentProvider>
+    </BrowserRouter>
+  </AuthLayer>
+);
+
 if (process.env.NODE_ENV === "development") {
   root.render(
     <React.StrictMode>
-      <AuthLayer>
-        <BrowserRouter>
-          <FluentProvider theme={webLightTheme}>
-            <App />
-          </FluentProvider>
-        </BrowserRouter>
-      </AuthLayer>
+      <Inner />
     </React.StrictMode>,
   );
 } else {
-  root.render(
-    <AuthLayer>
-      <BrowserRouter>
-        <FluentProvider theme={webLightTheme}>
-          <App />
-        </FluentProvider>
-      </BrowserRouter>
-    </AuthLayer>,
-  );
+  root.render(<Inner />);
 }

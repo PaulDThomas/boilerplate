@@ -28,7 +28,7 @@
       "type": "node-terminal",
       "cwd": "${workspaceRoot}",
       "env": {
-        "PORT": "3000"
+        "PORT": "1234"
       },
       "serverReadyAction": {
         "pattern": "Server running at (http://localhost:[0-9]+)",
