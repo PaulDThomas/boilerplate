@@ -1,10 +1,11 @@
 {
   "name": "boilerplate",
   "version": "0.3.1",
-  "private": false,
   "description": "My typescript/php boiler plate.",
   "author": "Paul Thomas <@PaulDThomas>",
+  "private": false,
   "license": "MIT",
+  "homepage": "https://github.com/PaulDThomas/boilerplate#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PaulDThomas/boilerplate.git"
@@ -19,16 +20,12 @@
     "php",
     "api"
   ],
+  "main": "dist/cjs/main.js",
+  "module": "dist/main.js",
+  "types": "dist/global.d.ts",
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "parcel build --public-url /target/ --dist-dir public_html/target/",
-    "start": "rmdir /q/s .parcel-cache && parcel public/index.html",
-    "prepare": "husky",
-    "test": "jest --collectCoverage=true --maxWorkers=4",
-    "test-watch": "jest --watch --collectCoverage=true"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,19 +38,31 @@
       "last 1 safari version"
     ]
   },
+  "scripts": {
+    "prepare": "husky",
+    "start": "rmdir /q/s .parcel-cache && parcel public/index.html",
+    "test": "jest --maxWorkers=1",
+    "test-watch": "jest --watch --collectCoverage=true --maxWorkers=4",
+    "test-coverage": "jest --collectCoverage=true --maxWorkers=4",
+    "build": "parcel build --public-url /target/ --dist-dir public_html/target/"
+  },
   "dependencies": {
     "@asup/simple-table": "^1.3.13",
     "@fluentui/react-components": "^9.47.5",
+    "@types/css-modules": "^1.0.5",
     "axios": "^1.1.3",
     "node-sass": "^9.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router": "^6.22.3",
     "react-router-dom": "^6.22.3"
   },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.8.2",
-    "@parcel/transformer-sass": "^2.11.0",
     "@parcel/transformer-webmanifest": "^2.8.2",
     "@prettier/plugin-php": "^0.22.2",
     "@testing-library/jest-dom": "^6.4.2",
@@ -83,7 +92,8 @@
     "ts-jest": "^29.0.3",
     "ts-jest-mock-import-meta": "^1.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "typescript-plugin-css-modules": "^5.1.0"
   },
   "@parcel/transformer-js": {
     "inlineEnvironment": [
@@ -96,12 +106,6 @@
       "pattern": "asup-[name]-[hash]-[local]",
       "dashedIndents": true
     }
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

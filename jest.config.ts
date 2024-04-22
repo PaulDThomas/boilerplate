@@ -4,8 +4,9 @@ const config: Config = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
   roots: ["<rootDir>", "<rootDir>/src"],
-  modulePaths: ["<rootDir>/src"],
+  modulePaths: ["node_modules", "<rootDir>/src"],
   testEnvironment: "jsdom",
+  verbose: true,
 
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest, include ts-jest-mock-import-meta
@@ -27,6 +28,8 @@ const config: Config = {
       },
     ],
   },
+  // Module file extensions for importing
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
 
   // Runs special logic, such as cleaning up components
   // when using React Testing Library and adds special
@@ -36,8 +39,6 @@ const config: Config = {
   // Matches parent folder `__tests__` and filename
   // should contain `test` or `spec`.
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  // Module file extensions for importing
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   // };
 
   // Code coverage
@@ -49,6 +50,7 @@ const config: Config = {
     "src/**/*.{ts,tsx}",
     "!**/index.ts",
     "!**/interface.ts",
+    "!**/main.ts",
     "!**/node_modules/**",
     "!**/vendor/**",
   ],
