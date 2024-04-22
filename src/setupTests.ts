@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { cleanup } from "@testing-library/react";
-import { localStorageMock } from "./__mocks__/localStorageMock";
+import { localStorageMock } from "./__dummy__/localStorageMock";
 
 // Move the reload function
 beforeAll(() => {
@@ -23,8 +23,7 @@ beforeAll(() => {
     })),
   });
 
-  Object.defineProperty(window, "localStorage", { value: localStorageMock() });
-
+  // Should be moved to beforeEach
   let counter = 1000;
   Object.defineProperty(window, "crypto", {
     writable: true,
@@ -41,7 +40,9 @@ beforeAll(() => {
   process.env.REACT_APP_API_URL = "/";
 });
 
-beforeEach(() => {});
+beforeEach(() => {
+  jest.spyOn(window, "localStorage", "get").mockImplementation(() => new localStorageMock());
+});
 
 afterEach(() => {
   jest.clearAllMocks();
