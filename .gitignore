@@ -12,7 +12,6 @@
 
 # production
 /build
-/public_html/ecrf/target
 /dist
 
 # Secrets

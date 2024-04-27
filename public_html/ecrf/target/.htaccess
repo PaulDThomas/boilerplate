@@ -1,0 +1,5 @@
+# https://stackoverflow.com/questions/44038456/how-to-setup-apache-server-for-react-route
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]

@@ -6,7 +6,7 @@ $targetSite = Join-Path $targetPath "/public_html/ecrf/target"
 
 # Delete previous build
 if (Test-Path ($distSite)) {
-  Remove-Item -Path $distSite -Recurse -Force
+  Get-ChildItem -Path $distSite -Exclude ".htaccess", ".gitignore" -Recurse | Remove-Item -Force
 }
 # Delet previous build at target
 if (Test-Path ($targetSite)) {
