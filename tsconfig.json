@@ -28,6 +28,6 @@
       }
     ]
   },
-  "include": ["global.d.ts", "src", "__mocks__"],
+  "include": ["global.d.ts", "src", "__dummy__"],
   "exclude": ["node_modules", "dist", "build", "public_html/ecrf/target"]
 }
